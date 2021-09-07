@@ -1,23 +1,56 @@
 // This file contains the boilerplate to execute your React app.
 // If you want to modify your application's content, start in "index.js"
 
-import { ReactInstance } from 'react-360-web';
+import { ReactInstance, Surface, Module } from 'react-360-web';
 
 function init(bundle, parent, options = {}) {
-  const r360 = new ReactInstance(bundle, parent, {
+  r360 = new ReactInstance(bundle, parent, {
     // Add custom options here
     fullScreen: true,
+    nativeModules: [
+      new surfaceModule(),
+    ],
     ...options,
   });
 
-  // Render your app content to the default cylinder surface
-  r360.renderToSurface(
+  introPanel = new Surface(
+    1000,
+    600,
+    Surface.SurfaceShape.Cylinder
+  )
+  introRoot = r360.renderToSurface(
     r360.createRoot('PorinTyoPajatVRTour', { /* initial props */ }),
-    r360.getDefaultSurface()
+    introPanel
+  );
+  travelPanel = new Surface(
+    200,
+    300,
+    Surface.SurfaceShape.Flat
+  )
+  travelPanel.setAngle(
+    0,
+    0.2
   );
 
   // Load the initial environment
   r360.compositor.setBackground(r360.getAssetURL('Langingpage.jpeg'));
+}
+
+class surfaceModule extends Module {
+  constructor() {
+    super('surfaceModule');
+  }
+  go() {
+
+  }
+  start() {
+    r360.renderToSurface(
+      r360.createRoot('Travel', {}),
+      travelPanel
+    );
+
+    r360.detachRoot(introRoot);
+  }
 }
 
 window.React360 = { init };

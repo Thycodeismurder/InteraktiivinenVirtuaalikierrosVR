@@ -7,9 +7,22 @@ import {
   Image,
   asset,
   VrButton,
-  Environment
+  Environment,
+  NativeModules
 } from 'react-360';
 import tour from './data/tourData';
+
+const surfaceModule = NativeModules.surfaceModule;
+
+export class Travel extends React.Component {
+  render() {
+    return (
+      <View>
+        <Image source={asset('info.png')} style={{ width: 100, height: 100 }}></Image>
+      </View>
+    )
+  }
+};
 
 export default class PorinTyoPajatVRTour extends React.Component {
   state = {
@@ -24,12 +37,8 @@ export default class PorinTyoPajatVRTour extends React.Component {
       info: tour[`${placeSelection}`].info,
       adjacentPlaces: tour[`${placeSelection}`].adjacentPlaces,
     })
-
+    surfaceModule.start();
     Environment.setBackgroundImage(asset(`./${placeSelection}.jpeg`));
-    let asd = placeSelection;
-    console.log(asd);
-    let asdf = `./${placeSelection}.jpeg`;
-    console.log(asdf);
   }
 
   createPlaceButtons(adjacentPlaces) {
@@ -83,3 +92,4 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('PorinTyoPajatVRTour', () => PorinTyoPajatVRTour);
+AppRegistry.registerComponent('Travel', () => Travel);
