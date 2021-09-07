@@ -2,6 +2,7 @@
 // If you want to modify your application's content, start in "index.js"
 
 import { ReactInstance, Surface, Module } from 'react-360-web';
+import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
 
 function init(bundle, parent, options = {}) {
   r360 = new ReactInstance(bundle, parent, {
@@ -40,12 +41,29 @@ class surfaceModule extends Module {
   constructor() {
     super('surfaceModule');
   }
-  go() {
-
-  }
-  start() {
+  go(id) {
+    state = {
+      click: 0
+    }
+    if (id === 'Veturitalli') {
+      travelPanel.resize(1000, 600);
+    } else if (id === 'Nuorisotalo') {
+      travelPanel.resize(1000, 600);
+    }
+    if (this.state.click === 0) {
+      console.log(click)
+      this.setState({
+        click: 1
+      });
+    } else if (this.state.click === 1) {
+      this.setState({
+        click: 0
+      })
+    }
+  };
+  start(placeSelection) {
     r360.renderToSurface(
-      r360.createRoot('Travel', {}),
+      r360.createRoot('Travel', { id: `${placeSelection}` }),
       travelPanel
     );
 

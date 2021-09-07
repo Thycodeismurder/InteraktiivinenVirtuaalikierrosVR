@@ -15,10 +15,35 @@ import tour from './data/tourData';
 const surfaceModule = NativeModules.surfaceModule;
 
 export class Travel extends React.Component {
+  state = {
+    img: {
+      name: `info.png`,
+      width: 100,
+      height: 100,
+    }
+  }
+  transformDisplay(id) {
+    this._changeSurfaceDimensions(id);
+    this.setState({
+      img: {
+        name: `Porin_${id}.jpeg`,
+        width: 1000,
+        height: 400,
+      }
+    })
+  }
+
+  _changeSurfaceDimensions(id) {
+    surfaceModule.go(id);
+  }
+
   render() {
+    let { img } = this.state;
     return (
       <View>
-        <Image source={asset('info.png')} style={{ width: 100, height: 100 }}></Image>
+        <VrButton onClick={() => this.transformDisplay(this.props.id)}>
+          <Image source={asset(`${img.name}`)} style={{ width: img.width, height: img.height }}></Image>
+        </VrButton>
       </View>
     )
   }
@@ -37,7 +62,7 @@ export default class PorinTyoPajatVRTour extends React.Component {
       info: tour[`${placeSelection}`].info,
       adjacentPlaces: tour[`${placeSelection}`].adjacentPlaces,
     })
-    surfaceModule.start();
+    surfaceModule.start(placeSelection);
     Environment.setBackgroundImage(asset(`./${placeSelection}.jpeg`));
   }
 
