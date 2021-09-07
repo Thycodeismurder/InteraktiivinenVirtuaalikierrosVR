@@ -4,16 +4,58 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
+  asset,
+  VrButton,
+  Environment
 } from 'react-360';
+import tour from './data/tourData';
 
 export default class PorinTyoPajatVRTour extends React.Component {
+  state = {
+    place: tour.Landingpage.placeName,
+    info: tour.Landingpage.info,
+    adjacentPlaces: tour.Landingpage.adjacentPlaces,
+  }
+
+  clickHandler(placeSelection) {
+    this.setState({
+      place: tour[`${placeSelection}`].placeName,
+      info: tour[`${placeSelection}`].info,
+      adjacentPlaces: tour[`${placeSelection}`].adjacentPlaces,
+    })
+
+    Environment.setBackgroundImage(asset(`./${placeSelection}.jpeg`));
+    let asd = placeSelection;
+    console.log(asd);
+    let asdf = `./${placeSelection}.jpeg`;
+    console.log(asdf);
+  }
+
+  createPlaceButtons(adjacentPlaces) {
+    let places = adjacentPlaces;
+    let buttons = [];
+
+    places.map(place => (
+      buttons.push(
+        <VrButton key={`${place}` + 'button'} onClick={() => this.clickHandler(place)}>
+          <Text style={{ backgroundColor: 'red' }}>{place}</Text>
+        </VrButton>
+      )
+    ))
+
+    return buttons
+  }
+
   render() {
     return (
       <View style={styles.panel}>
+        <Image source={asset('Porin_Tyopajat.jpeg')} style={{ width: 700, height: 300 }} />
         <View style={styles.greetingBox}>
           <Text style={styles.greeting}>
-            Welcome to React 360
+            Tervetuloa Porin Työpajojen VR kierrokselle!
           </Text>
+          {this.createPlaceButtons(this.state.adjacentPlaces)}
         </View>
       </View>
     );
