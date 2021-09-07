@@ -20,21 +20,14 @@ export class Travel extends React.Component {
       name: `info.png`,
       width: 100,
       height: 100,
-    }
+    },
   }
   transformDisplay(id) {
     this._changeSurfaceDimensions(id);
-    this.setState({
-      img: {
-        name: `Porin_${id}.jpeg`,
-        width: 1000,
-        height: 400,
-      }
-    })
   }
 
   _changeSurfaceDimensions(id) {
-    surfaceModule.go(id);
+    surfaceModule.go1(id);
   }
 
   render() {
@@ -44,6 +37,64 @@ export class Travel extends React.Component {
         <VrButton onClick={() => this.transformDisplay(this.props.id)}>
           <Image source={asset(`${img.name}`)} style={{ width: img.width, height: img.height }}></Image>
         </VrButton>
+      </View>
+    )
+  }
+};
+
+export class TravelButtons extends React.Component {
+  state = {
+    img: {
+      name: `Porin_${this.props.id}.jpeg`,
+      width: 500,
+      height: 300,
+    },
+    place: tour[`${this.props.id}`].placeName,
+    info: tour[`${this.props.id}`].info,
+    adjacentPlaces: tour[`${this.props.id}`].adjacentPlaces,
+  }
+  transformDisplay(id) {
+    this._changeSurfaceDimensions(id);
+  }
+
+  _changeSurfaceDimensions(id) {
+    surfaceModule.go(id);
+  }
+  clickHandler(id) {
+    this.setState({
+      place: tour[`${id}`].placeName,
+      info: tour[`${id}`].info,
+      adjacentPlaces: tour[`${id}`].adjacentPlaces,
+    })
+    surfaceModule.go(id);
+    Environment.setBackgroundImage(asset(`./${id}.jpeg`));
+  }
+  createPlaceButtons(adjacentPlaces) {
+    let places = adjacentPlaces;
+    let buttons = [];
+
+    places.map(place => (
+      buttons.push(
+        <VrButton key={`${place}` + 'button'} onClick={() => this.clickHandler(place)}>
+          <Text style={{ backgroundColor: 'red' }}>{place}</Text>
+        </VrButton>
+      )
+    ))
+
+    return buttons
+  }
+
+  render() {
+    let {img} = this.state;
+    return(
+      <View>
+        <VrButton onClick={() => this.transformDisplay(this.props.id)}>
+          <Image source={asset(`${img.name}`)} style={{ width: img.width, height: img.height }}></Image>
+        </VrButton>
+        <Text style={styles.greetingBox}>
+          {this.state.info}
+        </Text>
+        {this.createPlaceButtons(this.state.adjacentPlaces)}
       </View>
     )
   }
@@ -118,3 +169,4 @@ const styles = StyleSheet.create({
 
 AppRegistry.registerComponent('PorinTyoPajatVRTour', () => PorinTyoPajatVRTour);
 AppRegistry.registerComponent('Travel', () => Travel);
+AppRegistry.registerComponent('TravelButtons', () => TravelButtons);
