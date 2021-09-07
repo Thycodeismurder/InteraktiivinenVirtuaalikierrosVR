@@ -18,6 +18,19 @@ export default tour = {
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         `,
         adjacentPlaces: ['Nuorisotalo', 'Landingpage'],
+        info0: {
+            text: 'jaaha ollaan veturitallilla',
+        },
+        info1: {
+            text:'semmosta',
+            img:'info.png'
+        },
+        info2:{
+            text: 'asd'
+        },
+        info3: {
+            text: 'vittu'
+        }
     },
     Nuorisotalo: {
         placeName: 'Nuorisotalo',

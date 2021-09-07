@@ -13,7 +13,7 @@ import {
 import tour from './data/tourData';
 
 const surfaceModule = NativeModules.surfaceModule;
-
+//button to travel 
 export class Travel extends React.Component {
   state = {
     img: {
@@ -41,7 +41,7 @@ export class Travel extends React.Component {
     )
   }
 };
-
+//objects when travelbutton is clicked
 export class TravelButtons extends React.Component {
   state = {
     img: {
@@ -99,7 +99,42 @@ export class TravelButtons extends React.Component {
     )
   }
 };
-
+export class InfoButton extends React.Component{
+  state = {
+    img: {
+      name: `info.png`,
+      width: 100,
+      height: 100,
+    },
+  }
+  render() {
+    let {img} = this.state
+    return (
+      <View>
+        <Image source={asset(`${img.name}`)} style={{ width: img.width, height: img.height }}></Image>
+    </View>
+    );
+  }
+}
+export class InfoPanel extends React.Component{
+  state = {
+    img: {
+      name: `info.png`,
+      width: 100,
+      height: 100,
+    },
+  }
+  render() {
+    return (
+      <View>
+      <VrButton >
+        <Image source={asset(`${img.name}`)} style={{ width: img.width, height: img.height }}></Image>
+      </VrButton>
+    </View>
+    );
+  }
+}
+//landingpage
 export default class PorinTyoPajatVRTour extends React.Component {
   state = {
     place: tour.Landingpage.placeName,
@@ -149,7 +184,6 @@ export default class PorinTyoPajatVRTour extends React.Component {
 
 const styles = StyleSheet.create({
   panel: {
-    // Fill the entire surface
     width: 1000,
     height: 600,
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
@@ -170,3 +204,5 @@ const styles = StyleSheet.create({
 AppRegistry.registerComponent('PorinTyoPajatVRTour', () => PorinTyoPajatVRTour);
 AppRegistry.registerComponent('Travel', () => Travel);
 AppRegistry.registerComponent('TravelButtons', () => TravelButtons);
+AppRegistry.registerComponent('InfoPanel', () => InfoPanel);
+AppRegistry.registerComponent('InfoButton', () => InfoButton);
