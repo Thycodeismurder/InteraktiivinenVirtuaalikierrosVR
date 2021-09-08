@@ -105,13 +105,47 @@ export class InfoButton extends React.Component{
       name: `info.png`,
       width: 100,
       height: 100,
-    },
+    }
   }
+
+  transformDisplay (img,id) {
+    this._changeSurfaceDimensions(500,400,img,id)
+    this.setState({
+      img: {
+        name: `${img}`,
+        width: 500,
+        height: 300,
+      }
+    });
+  }
+
+  resetPanel(img,id) {
+    this._changeSurfaceDimensions(100,100,img,id)
+    this.setState({
+      img: {
+        name: `info.png`,
+        width: 100,
+        height: 100,
+      }
+    });
+  }
+  _changeSurfaceDimensions(width,height,img, id) {
+    surfaceModule.resizeSurface(width,height,img, id);
+  }
+
   render() {
     let {img} = this.state
     return (
-      <View>
+      <View style= {styles.displayPanel}
+      hitSlop={50}
+      onEnter={()=> this.transformDisplay(this.props.img, this.props.id)}
+      onExit={()=> this.resetPanel(this.props.img, this.props.id)}>
         <Image source={asset(`${img.name}`)} style={{ width: img.width, height: img.height }}></Image>
+        <View style={styles.attractionBox}>
+          <Text style={styles.attractionText}>
+            {this.props.text}
+          </Text>
+        </View>
     </View>
     );
   }
@@ -142,14 +176,14 @@ export default class PorinTyoPajatVRTour extends React.Component {
     adjacentPlaces: tour.Landingpage.adjacentPlaces,
   }
 
-  clickHandler(placeSelection) {
+  clickHandler(id) {
     this.setState({
-      place: tour[`${placeSelection}`].placeName,
-      info: tour[`${placeSelection}`].info,
-      adjacentPlaces: tour[`${placeSelection}`].adjacentPlaces,
+      place: tour[`${id}`].placeName,
+      info: tour[`${id}`].info,
+      adjacentPlaces: tour[`${id}`].adjacentPlaces,
     })
-    surfaceModule.start(placeSelection);
-    Environment.setBackgroundImage(asset(`./${placeSelection}.jpeg`));
+    surfaceModule.start(id);
+    Environment.setBackgroundImage(asset(`./${id}.jpeg`));
   }
 
   createPlaceButtons(adjacentPlaces) {
@@ -198,6 +232,22 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 30,
+  },
+  displayPanel: {
+    width: 100,
+    height: 100,
+    flexDirection: 'column',
+  },
+  attractionBox: {
+    padding: 20,
+    backgroundColor: '#F7F7F7',
+    borderColor: '#C4002F',
+    borderWidth: 2,
+    width: 500
+  },
+  attractionText: {
+    fontSize: 30,
+    color: '#C4002F'
   },
 });
 

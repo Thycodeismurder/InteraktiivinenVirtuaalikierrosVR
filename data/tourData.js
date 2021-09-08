@@ -20,16 +20,19 @@ export default tour = {
         adjacentPlaces: ['Nuorisotalo', 'Landingpage'],
         info0: {
             text: 'jaaha ollaan veturitallilla',
+            img:'info.png',
         },
         info1: {
             text:'semmosta',
             img:'info.png'
         },
         info2:{
-            text: 'asd'
+            text: 'asd',
+            img:'info.png',
         },
         info3: {
-            text: 'vittu'
+            text: 'vittu',
+            img:'info.png',
         }
     },
     Nuorisotalo: {
