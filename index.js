@@ -11,8 +11,40 @@ import {
   NativeModules
 } from 'react-360';
 import tour from './data/tourData';
-
+//methods from surfaceModule, movement etc.
 const surfaceModule = NativeModules.surfaceModule;
+const {AudioModule} = NativeModules;
+
+//audiopanel, background commentary
+class CommentaryPanel extends React.Component{
+  playCommentary() {
+    AudioModule.playEnvironmental ({
+      source: asset('audio/ambient.wav'),
+      volume: 1
+    });
+  }
+  stopCommentary() {
+    AudioModule.stopEnvironmental();
+  }
+  render() {
+    return(
+      <View style={styles.attractionBox}>
+        <View style={{flexDirection:'row'}}>
+          <VrButton onClick={()=> this.playCommentary()}>
+            <Text style={styles.attractionText}>
+              Kommentointi päälle!
+            </Text>
+          </VrButton>
+          <VrButton onClick={()=> this.stopCommentary()}>
+            <Text style={styles.attractionText}>
+              Kommentointi pois päältä!
+            </Text>
+          </VrButton>
+        </View>
+      </View>
+    )
+  }
+}
 //button to travel 
 export class Travel extends React.Component {
   state = {
@@ -47,7 +79,7 @@ export class TravelButtons extends React.Component {
     img: {
       name: `Porin_${this.props.id}.jpeg`,
       width: 500,
-      height: 300,
+      height: 200,
     },
     place: tour[`${this.props.id}`].placeName,
     info: tour[`${this.props.id}`].info,
@@ -95,6 +127,7 @@ export class TravelButtons extends React.Component {
           {this.state.info}
         </Text>
         {this.createPlaceButtons(this.state.adjacentPlaces)}
+        <CommentaryPanel></CommentaryPanel>
       </View>
     )
   }
