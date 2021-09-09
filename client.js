@@ -6,6 +6,7 @@ import React from 'react';
 import WebVRPolyfill from 'webvr-polyfill';
 const polyfill = new WebVRPolyfill();
 import tour from './data/tourData';
+let infoPanel = [];
 
 function init(bundle, parent, options = {}) {
   r360 = new ReactInstance(bundle, parent, {
@@ -16,6 +17,7 @@ function init(bundle, parent, options = {}) {
     ],
     ...options,
   });
+  
   //langingpage surface
   introPanel = new Surface(
     1000,
@@ -36,39 +38,39 @@ function init(bundle, parent, options = {}) {
     0,
     0.2
   );
-  info0Panel = new Surface(
-    100,
+  infoPanel[0] = new Surface(
+    101,
     100,
     Surface.SurfaceShape.Flat
   )
-  info0Panel.setAngle(
+  infoPanel[0].setAngle(
     0.2,
     0
   )
-  info1Panel = new Surface(
+  infoPanel[1] = new Surface(
     100,
     100,
     Surface.SurfaceShape.Flat
   )
-  info1Panel.setAngle(
+  infoPanel[1].setAngle(
     Math.PI / 2,
     0
   )
-  info2Panel = new Surface(
+  infoPanel[2] = new Surface(
     100,
     100,
     Surface.SurfaceShape.Flat
   )
-  info2Panel.setAngle(
+  infoPanel[2].setAngle(
     -Math.PI / 2,
     0
   )
-  info3Panel = new Surface(
+  infoPanel[3] = new Surface(
     100,
     100,
     Surface.SurfaceShape.Flat
   )
-  info3Panel.setAngle(
+  infoPanel[3].setAngle(
     3.6,
     0
   )
@@ -81,31 +83,29 @@ class surfaceModule extends Module {
   constructor() {
     super('surfaceModule');
   }
+  state= {
+    infoButtons : []
+  }
   resizeSurface(width,height,img,id) {
     if (id=== '0'){
-      info0Panel.resize(width,height)
+      infoPanel[0].resize(width,height)
     }else if (id=== '1'){
-      info1Panel.resize(width,height)
+      infoPanel[1].resize(width,height)
     } else if (id=== '2'){
-      info2Panel.resize(width,height)
+      infoPanel[2].resize(width,height)
     } else if (id=== '3'){
-      info3Panel.resize(width,height)
+      infoPanel[3].resize(width,height)
     }
   }
- //after first scene second method to create and render object onto info/travel
+ //create infoButtons and scene after landgingpage
   go(id) {
-    if (typeof(info0Button) !== 'undefined') {
-      r360.detachRoot(info0Button);
+    let {infoButtons} = this.state;
+    for (let i = 0; i <= 3; i++) {
+      if (typeof(infoButtons[i]) !== 'undefined') {
+        r360.detachRoot(infoButtons[i]);
+        }
     }
-    if (typeof(info1Button) !== 'undefined') {
-      r360.detachRoot(info1Button);
-    }
-    if (typeof(info2Button) !== 'undefined') {
-      r360.detachRoot(info2Button);
-    }
-    if (typeof(info3Button) !== 'undefined') {
-      r360.detachRoot(info3Button);
-    }
+   
     if (id === 'Landingpage') {
       r360.detachRoot(travelButtons);
       introRoot = r360.renderToSurface(
@@ -120,90 +120,59 @@ class surfaceModule extends Module {
       r360.createRoot('Travel', { id: `${id}` }),
       travelPanel
     );
+    
     }
-    if (tour[`${id}`].info0) {
-      info0Button = r360.renderToSurface(
-        r360.createRoot('InfoButton', { id: `0`,text: tour[`${id}`].info0.text, img: tour[`${id}`].info0.img}),
-        info0Panel
-      );
-    }
-    if(tour[`${id}`].info1) {
-      info1Button = r360.renderToSurface(
-        r360.createRoot('InfoButton', { id: `1`,text: tour[`${id}`].info1.text, img: tour[`${id}`].info1.img}),
-        info1Panel
-      );
-    }
-    if(tour[`${id}`].info2) {
-      info2Button = r360.renderToSurface(
-        r360.createRoot('InfoButton', { id: `2`,text: tour[`${id}`].info2.text, img: tour[`${id}`].info2.img}),
-        info2Panel
-      );
-    }
-    if(tour[`${id}`].info3) {
-      info3Button = r360.renderToSurface(
-        r360.createRoot('InfoButton', { id: `3`,text: tour[`${id}`].info3.text, img: tour[`${id}`].info3.img}),
-        info3Panel
-      );
+    for (let i = 0; i <= 3; i++) {
+      if (tour[`${id}`].info[i]) {
+        infoButtons[i] = r360.renderToSurface(
+          r360.createRoot('InfoButton', {id: `${i}`, text: tour[`${id}`].info[i].text, img: tour[`${id}`].info[i].img}),
+          infoPanel[i]
+        );
+      }
     }
   };
+  //create travelpanel and destroy infobuttons
   go1(id) {
-    if (id === 'Veturitalli') {
-      travelPanel.resize(1000, 600);
-    } else if (id === 'Nuorisotalo') {
-      travelPanel.resize(1000, 600);
-    }
+    let {infoButtons} = this.state;
+    
+    travelPanel.resize(1000, 600);
+   
     r360.detachRoot(travelButtonPanel);
     travelButtons = r360.renderToSurface(
       r360.createRoot('TravelButtons', { id: `${id}` }),
       travelPanel
     );
-    r360.detachRoot(info0Panel);
+    r360.detachRoot(infoPanel[0]);
+    for (let i = 0; i <= 3; i++) {
+      r360.detachRoot(infoButtons[i]);
+     }
   }
+  //create first scene after landingPage
   start(id) {
+    let {infoButtons} = this.state;
     travelButtonPanel = r360.renderToSurface(
       r360.createRoot('Travel', { id: `${id}` }),
       travelPanel
     );
-    console.log(tour[`${id}`].info0);
+    
 
     r360.detachRoot(introRoot);
-    if (typeof(info0Button) !== 'undefined') {
-      r360.detachRoot(info0Button);
-    }
-    if (typeof(info1Button) !== 'undefined') {
-      r360.detachRoot(info1Button);
-    }
-    if (typeof(info2Button) !== 'undefined') {
-      r360.detachRoot(info2Button);
-    }
-    if (typeof(info3Button) !== 'undefined') {
-      r360.detachRoot(info3Button);
+    for (let i = 0; i <= 3; i++) {
+      if (typeof(infoButtons[i]) !== 'undefined') {
+        r360.detachRoot(infoButtons[i]);
+        }
     }
 
-    if (tour[`${id}`].info0) {
-      info0Button = r360.renderToSurface(
-        r360.createRoot('InfoButton', {id: `0`, text: tour[`${id}`].info0.text, img: tour[`${id}`].info0.img}),
-        info0Panel
-      );
+    for (let i = 0; i <= 3; i++) {
+      if (tour[`${id}`].info[i]) {
+        infoButtons[i] = r360.renderToSurface(
+          r360.createRoot('InfoButton', {id: `${i}`, text: tour[`${id}`].info[i].text, img: tour[`${id}`].info[i].img}),
+          infoPanel[i]
+        );
+      }
     }
-    if(tour[`${id}`].info1) {
-      info1Button = r360.renderToSurface(
-        r360.createRoot('InfoButton', {id: `1`, text: tour[`${id}`].info1.text, img: tour[`${id}`].info1.img}),
-        info1Panel
-      );
-    }
-    if(tour[`${id}`].info2) {
-      info2Button = r360.renderToSurface(
-        r360.createRoot('InfoButton', {id: `2`, text: tour[`${id}`].info2.text, img: tour[`${id}`].info2.img}),
-        info2Panel
-      );
-    }
-    if(tour[`${id}`].info3) {
-      info3Button = r360.renderToSurface(
-        r360.createRoot('InfoButton', {id: `3`, text: tour[`${id}`].info3.text, img: tour[`${id}`].info3.img}),
-        info3Panel
-      );
-    }
+    
+    
   }
 }
 

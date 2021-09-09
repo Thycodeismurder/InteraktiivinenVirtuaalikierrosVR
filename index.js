@@ -28,13 +28,15 @@ class CommentaryPanel extends React.Component{
   }
   render() {
     return(
-      <View style={styles.attractionBox}>
-        <View style={{flexDirection:'row'}}>
+      <View style={{flexDirection:'row'}}>
+        <View style={styles.attractionBox}>
           <VrButton onClick={()=> this.playCommentary()}>
             <Text style={styles.attractionText}>
               Kommentointi päälle!
             </Text>
-          </VrButton>
+        </VrButton>
+        </View>
+        <View style={styles.attractionBox}>
           <VrButton onClick={()=> this.stopCommentary()}>
             <Text style={styles.attractionText}>
               Kommentointi pois päältä!
@@ -82,7 +84,7 @@ export class TravelButtons extends React.Component {
       height: 200,
     },
     place: tour[`${this.props.id}`].placeName,
-    info: tour[`${this.props.id}`].info,
+    mainInfo: tour[`${this.props.id}`].mainInfo,
     adjacentPlaces: tour[`${this.props.id}`].adjacentPlaces,
   }
   transformDisplay(id) {
@@ -91,11 +93,12 @@ export class TravelButtons extends React.Component {
 
   _changeSurfaceDimensions(id) {
     surfaceModule.go(id);
+    console.log(id);
   }
   clickHandler(id) {
     this.setState({
       place: tour[`${id}`].placeName,
-      info: tour[`${id}`].info,
+      mainInfo: tour[`${id}`].mainInfo,
       adjacentPlaces: tour[`${id}`].adjacentPlaces,
     })
     surfaceModule.go(id);
@@ -107,7 +110,7 @@ export class TravelButtons extends React.Component {
 
     places.map(place => (
       buttons.push(
-        <VrButton key={`${place}` + 'button'} onClick={() => this.clickHandler(place)}>
+        <VrButton key={`${place}` + 'button'} onClick={() => this.clickHandler(place)} style={{padding: 1}}>
           <Text style={{ backgroundColor: 'red' }}>{place}</Text>
         </VrButton>
       )
@@ -119,12 +122,12 @@ export class TravelButtons extends React.Component {
   render() {
     let {img} = this.state;
     return(
-      <View>
+      <View >
         <VrButton onClick={() => this.transformDisplay(this.props.id)}>
           <Image source={asset(`${img.name}`)} style={{ width: img.width, height: img.height }}></Image>
         </VrButton>
         <Text style={styles.greetingBox}>
-          {this.state.info}
+          {this.state.mainInfo}
         </Text>
         {this.createPlaceButtons(this.state.adjacentPlaces)}
         <CommentaryPanel></CommentaryPanel>
@@ -142,6 +145,7 @@ export class InfoButton extends React.Component{
   }
 
   transformDisplay (img,id) {
+    console.log(id);
     this._changeSurfaceDimensions(500,400,img,id)
     this.setState({
       img: {
@@ -205,14 +209,14 @@ export class InfoPanel extends React.Component{
 export default class PorinTyoPajatVRTour extends React.Component {
   state = {
     place: tour.Landingpage.placeName,
-    info: tour.Landingpage.info,
+    mainInfo: tour.Landingpage.mainInfo,
     adjacentPlaces: tour.Landingpage.adjacentPlaces,
   }
 
   clickHandler(id) {
     this.setState({
       place: tour[`${id}`].placeName,
-      info: tour[`${id}`].info,
+      MainInfo: tour[`${id}`].mainInfo,
       adjacentPlaces: tour[`${id}`].adjacentPlaces,
     })
     surfaceModule.start(id);
