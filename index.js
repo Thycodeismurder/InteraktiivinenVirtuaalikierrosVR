@@ -15,11 +15,17 @@ import tour from './data/tourData';
 const surfaceModule = NativeModules.surfaceModule;
 const {AudioModule} = NativeModules;
 
+
 //audiopanel, background commentary
 class CommentaryPanel extends React.Component{
-  playCommentary() {
+  state = {
+    id : this.props.id
+  }
+  playCommentary(id) {
+    console.log(id);
+    this.setState({id : id})
     AudioModule.playEnvironmental ({
-      source: asset('audio/ambient.wav'),
+      source: asset(`audio/${id}.wav`),
       volume: 1
     });
   }
@@ -30,7 +36,7 @@ class CommentaryPanel extends React.Component{
     return(
       <View style={{flexDirection:'row'}}>
         <View style={styles.attractionBox}>
-          <VrButton onClick={()=> this.playCommentary()}>
+          <VrButton onClick={()=> this.playCommentary(this.props.id)}>
             <Text style={styles.attractionText}>
               Kommentointi päälle!
             </Text>
@@ -80,8 +86,8 @@ export class TravelButtons extends React.Component {
   state = {
     img: {
       name: `Porin_${this.props.id}.jpeg`,
-      width: 500,
-      height: 200,
+      width: 1000,
+      height: 400,
     },
     place: tour[`${this.props.id}`].placeName,
     mainInfo: tour[`${this.props.id}`].mainInfo,
@@ -93,7 +99,6 @@ export class TravelButtons extends React.Component {
 
   _changeSurfaceDimensions(id) {
     surfaceModule.go(id);
-    console.log(id);
   }
   clickHandler(id) {
     this.setState({
@@ -103,6 +108,10 @@ export class TravelButtons extends React.Component {
     })
     surfaceModule.go(id);
     Environment.setBackgroundImage(asset(`./${id}.jpeg`));
+    AudioModule.playEnvironmental ({
+      source: asset(`audio/${id}.wav`),
+      volume: 1
+    });
   }
   createPlaceButtons(adjacentPlaces) {
     let places = adjacentPlaces;
@@ -130,7 +139,7 @@ export class TravelButtons extends React.Component {
           {this.state.mainInfo}
         </Text>
         {this.createPlaceButtons(this.state.adjacentPlaces)}
-        <CommentaryPanel></CommentaryPanel>
+        <CommentaryPanel id={this.props.id}></CommentaryPanel>
       </View>
     )
   }
@@ -145,7 +154,6 @@ export class InfoButton extends React.Component{
   }
 
   transformDisplay (img,id) {
-    console.log(id);
     this._changeSurfaceDimensions(500,400,img,id)
     this.setState({
       img: {
@@ -221,6 +229,10 @@ export default class PorinTyoPajatVRTour extends React.Component {
     })
     surfaceModule.start(id);
     Environment.setBackgroundImage(asset(`./${id}.jpeg`));
+    AudioModule.playEnvironmental ({
+      source: asset(`audio/${id}.wav`),
+      volume: 1
+    });
   }
 
   createPlaceButtons(adjacentPlaces) {
@@ -293,3 +305,4 @@ AppRegistry.registerComponent('Travel', () => Travel);
 AppRegistry.registerComponent('TravelButtons', () => TravelButtons);
 AppRegistry.registerComponent('InfoPanel', () => InfoPanel);
 AppRegistry.registerComponent('InfoButton', () => InfoButton);
+AppRegistry.registerComponent('CommentaryPanel', () => CommentaryPanel);

@@ -83,6 +83,7 @@ class surfaceModule extends Module {
   constructor() {
     super('surfaceModule');
   }
+  
   state= {
     infoButtons : []
   }
@@ -105,7 +106,7 @@ class surfaceModule extends Module {
         r360.detachRoot(infoButtons[i]);
         }
     }
-   
+    travelPanel.setAngle(0,0.2);
     if (id === 'Landingpage') {
       r360.detachRoot(travelButtons);
       introRoot = r360.renderToSurface(
@@ -135,7 +136,8 @@ class surfaceModule extends Module {
   go1(id) {
     let {infoButtons} = this.state;
     
-    travelPanel.resize(1000, 600);
+    travelPanel.resize(1000, 1000);
+    travelPanel.setAngle(0,-0.1);
    
     r360.detachRoot(travelButtonPanel);
     travelButtons = r360.renderToSurface(

@@ -8,6 +8,9 @@ export default tour = {
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         `,
         adjacentPlaces: ['Veturitalli', 'Nuorisotalo'],
+        info:[
+
+        ],
     },
     Veturitalli: {
         placeName: 'Veturitalli',
@@ -29,7 +32,7 @@ export default tour = {
             img:'info.png',
         },{
             text: 'vittu',
-            img:'info.png',
+            img:'Porin_huone1.jpeg',
         }],
     },
     Nuorisotalo: {
