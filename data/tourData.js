@@ -7,22 +7,22 @@ export default tour = {
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         `,
-        adjacentPlaces: ['Veturitalli', 'Nuorisotalo'],
+        adjacentPlaces: ['PorinMetsä', 'Luontopolku'],
         info:[
 
         ],
     },
-    Veturitalli: {
-        placeName: 'Veturitalli',
+    PorinMetsä: {
+        placeName: 'PorinMetsä',
         mainInfo: `
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         `,
-        adjacentPlaces: ['Nuorisotalo', 'Landingpage'],
+        adjacentPlaces: ['Luontopolku', 'Landingpage'],
         info:[ {
-            text: 'jaaha ollaan veturitallilla',
+            text: 'jaaha ollaan porin metsässä',
             img:'info.png',
         },{
             text:'semmosta',
@@ -35,15 +35,15 @@ export default tour = {
             img:'Porin_huone1.jpeg',
         }],
     },
-    Nuorisotalo: {
-        placeName: 'Nuorisotalo',
+    Luontopolku: {
+        placeName: 'Luontopolku',
         mainInfo: `
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         `,
-        adjacentPlaces: ['Veturitalli', 'Landingpage','Kaytava','Huone1'],
+        adjacentPlaces: ['PorinMetsä', 'Landingpage','Kaytava','Huone1'],
         info:[
 
         ],
@@ -56,7 +56,7 @@ export default tour = {
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         `,
-        adjacentPlaces: ['Nuorisotalo','Huone1','Huone3'],
+        adjacentPlaces: ['Luontopolku','Huone1','Huone3'],
         info:[
 
         ],
@@ -69,7 +69,7 @@ export default tour = {
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         `,
-        adjacentPlaces: ['Nuorisotalo','Kaytava','Huone2'],
+        adjacentPlaces: ['Luontopolku','Kaytava','Huone2'],
         info:[
 
         ],

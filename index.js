@@ -26,7 +26,7 @@ class CommentaryPanel extends React.Component{
     this.setState({id : id})
     AudioModule.playEnvironmental ({
       source: asset(`audio/${id}.wav`),
-      volume: 1
+      volume: 0.1
     });
   }
   stopCommentary() {
@@ -110,7 +110,7 @@ export class TravelButtons extends React.Component {
     Environment.setBackgroundImage(asset(`./${id}.jpeg`));
     AudioModule.playEnvironmental ({
       source: asset(`audio/${id}.wav`),
-      volume: 1
+      volume: 0.1
     });
   }
   createPlaceButtons(adjacentPlaces) {
@@ -231,7 +231,7 @@ export default class PorinTyoPajatVRTour extends React.Component {
     Environment.setBackgroundImage(asset(`./${id}.jpeg`));
     AudioModule.playEnvironmental ({
       source: asset(`audio/${id}.wav`),
-      volume: 1
+      volume: 0.1
     });
   }
 
@@ -253,10 +253,10 @@ export default class PorinTyoPajatVRTour extends React.Component {
   render() {
     return (
       <View style={styles.panel}>
-        <Image source={asset('Porin_Tyopajat.jpeg')} style={{ width: 700, height: 300 }} />
+        <Image source={asset('Luonto.jpg')} style={{ width: 700, height: 300 }} />
         <View style={styles.greetingBox}>
           <Text style={styles.greeting}>
-            Tervetuloa Porin Työpajojen VR kierrokselle!
+            Tervetuloa Porin Luonto VR kierrokselle!
           </Text>
           {this.createPlaceButtons(this.state.adjacentPlaces)}
         </View>

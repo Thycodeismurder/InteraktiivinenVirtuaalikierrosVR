@@ -1,5 +1,5 @@
 {
-  "name": "PorinTyoPajatVRTour",
+  "name": "InteraktiivinenVirtuaalikierrosVR",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -15,7 +15,8 @@
     "react-360-web": "~1.1.0",
     "react-native": "~0.55.4",
     "three": "^0.87.0",
-    "webvr-polyfill": "^0.10.12"
+    "webvr-polyfill": "^0.10.12",
+    "metro": "0.66.2"
   },
   "devDependencies": {
     "babel-jest": "^19.0.0",
@@ -23,7 +24,8 @@
     "jest": "^19.0.2",
     "react-devtools": "^2.5.2",
     "react-test-renderer": "16.0.0",
-    "xopen": "1.0.0"
+    "xopen": "1.0.0",
+    "metro": "0.66.2"
   },
   "jest": {
     "preset": "react-360"
