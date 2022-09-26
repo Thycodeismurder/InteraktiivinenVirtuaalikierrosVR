@@ -7,10 +7,112 @@ export default tour = {
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         `,
-        adjacentPlaces: ['PorinMetsä', 'Luontopolku'],
+        adjacentPlaces: ['PorinMetsä', 'Luontopolku', "Rhodos", "Joutsijarvi"],
         info:[
 
         ],
+    },
+    Rhodos: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['LandingPage', 'Rhodos_1'],
+        info: []
+    },
+    Rhodos_1: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_2'],
+        info: []
+    },
+    Rhodos_2: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_3'],
+        info: []
+    },
+    Rhodos_3: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_4'],
+        info: []
+    },
+    Rhodos_4: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_5'],
+        info: []
+    },
+    Rhodos_5: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_6'],
+        info: []
+    },
+    Rhodos_6: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_7'],
+        info: []
+    },
+    Rhodos_7: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_8'],
+        info: []
+    },
+    Rhodos_8: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_9'],
+        info: []
+    },
+    Rhodos_9: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_10'],
+        info: []
+    },
+    Rhodos_10: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_11'],
+        info: []
+    },
+    Rhodos_11: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_12'],
+        info: []
+    },
+    Rhodos_12: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_13'],
+        info: []
+    },
+    Rhodos_13: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_14'],
+        info: []
+    },
+    Rhodos_14: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_15'],
+        info: []
+    },
+    Rhodos_15: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: ['Rhodos', 'Rhodos_16'],
+        info: []
+    },
+    Rhodos_16: {
+        placeName: 'Rhodos',
+        mainInfo: 'Tervetuloa Rhodoksen vuori maisema reitille',
+        adjacentPlaces: [ 'Rhodos'],
+        info: []
     },
     PorinMetsä: {
         placeName: 'PorinMetsä',
